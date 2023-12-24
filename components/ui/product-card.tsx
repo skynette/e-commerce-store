@@ -6,6 +6,8 @@ import Image from "next/image";
 import IconButton from "@/components/ui/icon-button";
 import { Expand, ShoppingCart } from "lucide-react";
 import Currency from "@/components/ui/currency";
+import { useRouter } from "next/navigation";
+import ProductCardSkeleton from "./product-card-skeleton";
 
 interface ProductCardProps {
     product: Product;
@@ -13,6 +15,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const [isMounted, setIsMounted] = useState(false)
+    const router = useRouter();
 
     useEffect(() => {
         setIsMounted(true)
@@ -20,8 +23,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
     if (!isMounted) return null
 
+    const handleClick = () => {
+        router.push(`/product/${product?.id}`)
+    }
+
+    if (!product) return <ProductCardSkeleton />
+
     return (
-        <div className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
+        <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
             {/* images and actions */}
             <div className="aspect-square rounded-xl bg-gray-100 relative">
                 <Image alt="image" src={product?.images[0]?.url} fill className="aspect-square object-cover rounded-md" />
@@ -29,11 +38,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     <div className="flex gap-x-6 justify-center">
                         <IconButton
                             onClick={() => console.log('add to cart')}
-                            icon={<Expand size={20} className="text-gray-600"/>}
+                            icon={<Expand size={20} className="text-gray-600" />}
                         />
                         <IconButton
                             onClick={() => console.log('add to cart')}
-                            icon={<ShoppingCart size={20} className="text-gray-600"/>}
+                            icon={<ShoppingCart size={20} className="text-gray-600" />}
                         />
                     </div>
                 </div>
@@ -49,7 +58,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 </p>
 
             </div>
-            
+
             {/* price */}
             <div className="flex items-center justify-between">
                 <Currency value={product?.price} />

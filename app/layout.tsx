@@ -5,6 +5,7 @@ import { ToastProvider } from '@/providers/toast-provider'
 import MyThemeProvider from '@/providers/theme-provider'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
+import ModalProvider from '@/providers/modal-provider'
 
 
 const urbanist = Urbanist({ subsets: ['latin'] })
@@ -24,7 +25,9 @@ export default function RootLayout({
             <body className={urbanist.className}>
                 <MyThemeProvider>
                     <ToastProvider />
+                    {/* @ts-ignore */}
                     <Navbar />
+                    <ModalProvider />
                     {children}
                     <Footer />
                 </MyThemeProvider>

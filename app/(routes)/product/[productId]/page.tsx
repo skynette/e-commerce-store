@@ -13,7 +13,6 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
     const product = await getProduct(params.productId)
-    console.log(product)
     const suggestedProducts = await getProducts({
         categoryId: product.category.id,
     })

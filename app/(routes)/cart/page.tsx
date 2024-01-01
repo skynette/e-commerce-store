@@ -5,8 +5,9 @@ import useCart from '@/hooks/use-cart'
 import { useEffect, useState } from 'react'
 import CartItem from './components/cart-item'
 import Summary from './components/summary'
+import Loading from './loading'
 
-const CartPagr = () => {
+const CartPage = () => {
     const [isMounted, setIsMounted] = useState(false)
     const cart = useCart()
 
@@ -14,7 +15,7 @@ const CartPagr = () => {
         setIsMounted(true)
     }, [])
 
-    if (!isMounted) return null
+    if (!isMounted) return <Loading />
 
     return (
     <div className='bg-white'>
@@ -39,4 +40,4 @@ const CartPagr = () => {
     );
 }
 
-export default CartPagr;
+export default CartPage;

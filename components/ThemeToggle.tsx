@@ -1,10 +1,9 @@
 'use client'
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { useTheme } from 'next-themes'
 import { FC } from 'react'
-import { Button } from './ui/button'
+import { Button } from './ui/button-2'
 import { Laptop, Moon, Sun } from 'lucide-react'
 
 interface ThemeToggleProps {

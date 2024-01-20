@@ -21,6 +21,23 @@ interface CategoryPageProps {
     }
 }
 
+export async function generateMetadata({
+    params,
+}: {
+    params: {
+        categoryId: string;
+    };
+}) {
+    const category = await getCategory(params.categoryId)
+
+    return {
+        title: `${category.name} - Gift Shop`,
+        description: `${category.name} - Shop for ${category.name} on Gift`,
+        category: category.name,
+        keywords: category.name,
+    };
+}
+
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
     const products = await getProducts({
         categoryId: params.categoryId,

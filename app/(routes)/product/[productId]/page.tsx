@@ -4,6 +4,26 @@ import ProductList from '@/components/product-list'
 import Container from '@/components/ui/container'
 import Gallery from '@/components/gallery'
 import Info from '@/components/info'
+import { Metadata } from 'next';
+interface Params {
+    productId: string;
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Params;
+}): Promise<Metadata> {
+    const product = await getProduct(params.productId)
+
+
+    return {
+        title: `${product.name} - Gift Shop`,
+        description: `${product.name} - Shop for ${product.name} on Gift`,
+        category: product.category.name,
+        keywords: product.category.name,
+    };
+}
 
 interface ProductPageProps {
     params: {
